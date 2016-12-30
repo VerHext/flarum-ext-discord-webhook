@@ -21,13 +21,11 @@ class Controller {
     }
 
     public function subscribe(Dispatcher $events) {
-	events->listen(PostWasPosted::class, [$this, 'onPostWasPosted']);
+	$events->listen(PostWasPosted::class, [$this, 'onPostWasPosted']);
     }
 
     public function onPostWasPosted(PostWasPosted $event) {
 	$webhook_url = $this->settings->get('Cl1608Ho-discord-webhook.webhook_url');
-
-	// Let's just assume we got that url :)
 
 	$postData = array(
 	    'embeds' => array(
