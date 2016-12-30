@@ -1,0 +1,6 @@
+Cl1608Ho-discord-webhook:
+
+  admin:
+    settings:
+      title: "Discord Webhook Settings"
+      webhook_url_label: "Webhook URL"

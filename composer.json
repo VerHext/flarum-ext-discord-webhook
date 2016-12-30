@@ -1,0 +1,36 @@
+{
+    "name": "Cl1608Ho/flarum-ext-discord-webhook",
+    "description": "Sends notifications to a discord webhook when a new post is made",
+    "type": "flarum-extension",
+    "keywords": ["notification"],
+    "license": "MIT",
+    "version": "v0.1.0-beta.6",
+    "authors": [
+        {
+            "name": "Cl1608Ho",
+            "email": "cl1608ho@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Cl1608Ho/flarum-ext-discord-webhook/issues",
+        "source": "https://github.com/Cl1608Ho/flarum-ext-discord-webhook"
+    },
+    "require": {
+        "flarum/core": "^0.1.0-beta.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cl1608Ho\\DiscordWebhook\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Discord Webhook",
+            "icon": {
+                "name": "envelope",
+                "backgroundColor": "#7289da",
+                "color": "#fff"
+            }
+        }
+    }
+}
