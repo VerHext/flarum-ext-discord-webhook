@@ -4,7 +4,7 @@
     "type": "flarum-extension",
     "keywords": ["notification"],
     "license": "MIT",
-    "version": "v0.1.0-beta.6",
+    "version": "v0.1.0-beta",
     "authors": [
         {
             "name": "Cl1608Ho",
