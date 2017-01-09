@@ -3,4 +3,7 @@ Cl1608Ho-discord-webhook:
   admin:
     settings:
       title: "Discord Webhook Settings"
-      webhook_url_label: "Webhook URL"
+      error_tags_disabled_or_no_tags: "Tags are disabled or there are no Tags"
+      webhook_url_legend: "Webhook URLs"
+      webhook_url_helptext: "You can configure the Webhook URLs for each Tag seperately. Flarum will send a notification for each Tag you assign to a discussion while creating it. If you only want to send notifications for a special Tag, just leave out the other ones. See this article for more help: <a>https://support.discordapp.com/hc/articles/228383668</a>"
+      webhook_url_placeholder: "https://canary.discordapp.com/api/webhooks/..."

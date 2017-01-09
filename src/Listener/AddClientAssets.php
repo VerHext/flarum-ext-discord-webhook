@@ -2,6 +2,8 @@
 
 namespace Cl1608Ho\DiscordWebhook\Listener;
 
+use DirectoryIterator;
+use Flarum\Event\ConfigureLocales;
 use Flarum\Event\ConfigureWebApp;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -20,9 +22,9 @@ class AddClientAssets {
     public function addAssets(ConfigureWebApp $event) {
         if ($event->isAdmin()) {
             $event->addAssets([
-                __DIR__.'/../../js/admin/dist/extension.js'
+                __DIR__ . '/../../js/admin/dist/extension.js'
             ]);
-            $event->addBootstrapper('Cl1608Ho/discord/webhook/main');
+            $event->addBootstrapper('Cl1608Ho/DiscordWebhook/main');
         }
     }
 
@@ -30,7 +32,7 @@ class AddClientAssets {
      * @param ConfigureLocales $event
      */
     public function addLocales(ConfigureLocales $event) {
-	foreach (new DirectoryIterator(__DIR__.'/../../locale') as $file) {
+	foreach (new DirectoryIterator(__DIR__ . '/../../locale') as $file) {
 	    if ($file->isFile() && $file->getExtension() == "yml") {
                 $event->locales->addTranslations($file->getBasename('.' . $file->getExtension()), $file->getPathname());
             }

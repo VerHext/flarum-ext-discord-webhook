@@ -1,12 +1,46 @@
 'use strict';
 
-System.register('Cl1608Ho/discord/webhook/components/GithubSettingsModal', ['flarum/components/SettingsModal'], function (_export, _context) {
+System.register('Cl1608Ho/DiscordWebhook/components/DiscordWebhookSettingsModal', ['flarum/components/SettingsModal', 'flarum/components/Button', 'flarum/components/Alert', 'flarum/tags/helpers/tagIcon', 'flarum/tags/utils/sortTags'], function (_export, _context) {
   "use strict";
 
-  var SettingsModal, DiscordWebhookSettingsModal;
+  var SettingsModal, Button, Alert, tagIcon, sortTags, DiscordWebhookSettingsModal;
+
+
+  function tagItem(tag) {
+    return m(
+      'li',
+      { 'data-id': tag.id(), style: { color: tag.color() } },
+      m(
+        'div',
+        { className: 'TagListItem-info' },
+        tagIcon(tag),
+        m(
+          'span',
+          { className: 'TagListItem-name' },
+          tag.name()
+        )
+      ),
+      !tag.isChild() && tag.position() !== null ? m(
+        'ol',
+        { className: 'TagListItem-children' },
+        sortTags(app.store.all('tags')).filter(function (child) {
+          return child.parent() === tag;
+        }).map(tagItem)
+      ) : ''
+    );
+  }
+
   return {
     setters: [function (_flarumComponentsSettingsModal) {
       SettingsModal = _flarumComponentsSettingsModal.default;
+    }, function (_flarumComponentsButton) {
+      Button = _flarumComponentsButton.default;
+    }, function (_flarumComponentsAlert) {
+      Alert = _flarumComponentsAlert.default;
+    }, function (_flarumTagsHelpersTagIcon) {
+      tagIcon = _flarumTagsHelpersTagIcon.default;
+    }, function (_flarumTagsUtilsSortTags) {
+      sortTags = _flarumTagsUtilsSortTags.default;
     }],
     execute: function () {
       DiscordWebhookSettingsModal = function (_SettingsModal) {
@@ -20,26 +54,77 @@ System.register('Cl1608Ho/discord/webhook/components/GithubSettingsModal', ['fla
         babelHelpers.createClass(DiscordWebhookSettingsModal, [{
           key: 'className',
           value: function className() {
-            return 'DiscordWebhookSettingsModal Modal--small';
+            return 'DiscordWebhookSettingsModal Modal--large';
           }
         }, {
           key: 'title',
           value: function title() {
-            return app.translator.trans('Cl1608Ho-discord-webhook.admin.title');
+            return app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.title');
+          }
+        }, {
+          key: 'content',
+          value: function content() {
+            var tags = app.store.all('tags');
+            if (tags.length == 0) {
+              // Tags disabled or no Tags set up
+              return m(
+                'div',
+                { className: 'Modal-body' },
+                m(
+                  Alert,
+                  { type: 'error', dismissible: false },
+                  app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.error_tags_disabled_or_no_tags')
+                )
+              );
+            } else {
+              return m(
+                'div',
+                { className: 'Modal-body' },
+                m(
+                  'div',
+                  { className: 'Form' },
+                  this.form(tags),
+                  m(
+                    'div',
+                    { className: 'Form-group' },
+                    this.submitButton()
+                  )
+                )
+              );
+            }
           }
         }, {
           key: 'form',
-          value: function form() {
-            return [m(
+          value: function form(tags) {
+            var that = this;
+            var forms = [];
+            tags.forEach(function (tag) {
+              forms.push(m(
+                'div',
+                { className: 'Form-group' },
+                m(
+                  'label',
+                  null,
+                  tag.data.attributes.name
+                ),
+                m('input', { className: 'FormControl', placeholder: app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_placeholder'), bidi: that.setting('Cl1608Ho-discord-webhook.webhook_urls.' + tag.data.id) })
+              ));
+            });
+            return m(
               'div',
               { className: 'Form-group' },
               m(
-                'label',
+                'legend',
                 null,
-                app.translator.trans('Cl1608Ho-discord-webhook.admin.webhook_url_label')
+                app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_legend')
               ),
-              m('input', { className: 'FormControl', bidi: this.setting('Cl1608Ho-discord-webhook.webhook_url') })
-            )];
+              m(
+                'div',
+                { className: 'helpText' },
+                app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_helptext', { a: m('a', { href: 'https://support.discordapp.com/hc/articles/228383668', target: '_blank' }) })
+              ),
+              forms
+            );
           }
         }]);
         return DiscordWebhookSettingsModal;
@@ -51,23 +136,23 @@ System.register('Cl1608Ho/discord/webhook/components/GithubSettingsModal', ['fla
 });;
 'use strict';
 
-System.register('Cl1608Ho/discord/webhook/main', ['flarum/app', 'Cl1680Ho/discord/webhook/components/DiscordWebhookSettingsModal'], function (_export, _context) {
-  "use strict";
+System.register('Cl1608Ho/DiscordWebhook/main', ['flarum/app', 'Cl1608Ho/DiscordWebhook/components/DiscordWebhookSettingsModal'], function (_export, _context) {
+    "use strict";
 
-  var app, DiscordWebhookSettingsModal;
-  return {
-    setters: [function (_flarumApp) {
-      app = _flarumApp.default;
-    }, function (_Cl1680HoDiscordWebhookComponentsDiscordWebhookSettingsModal) {
-      DiscordWebhookSettingsModal = _Cl1680HoDiscordWebhookComponentsDiscordWebhookSettingsModal.default;
-    }],
-    execute: function () {
+    var app, DiscordWebhookSettingsModal;
+    return {
+        setters: [function (_flarumApp) {
+            app = _flarumApp.default;
+        }, function (_Cl1608HoDiscordWebhookComponentsDiscordWebhookSettingsModal) {
+            DiscordWebhookSettingsModal = _Cl1608HoDiscordWebhookComponentsDiscordWebhookSettingsModal.default;
+        }],
+        execute: function () {
 
-      app.initializers.add('Cl1608Ho-discord-webhook', function () {
-        app.extensionSettings['Cl1608Ho-discord-webhook'] = function () {
-          return app.modal.show(new DiscordSettingsModal());
-        };
-      });
-    }
-  };
+            app.initializers.add('Cl1608Ho-discord-webhook', function () {
+                app.extensionSettings['Cl1608Ho-discord-webhook'] = function () {
+                    return app.modal.show(new DiscordWebhookSettingsModal());
+                };
+            });
+        }
+    };
 });
