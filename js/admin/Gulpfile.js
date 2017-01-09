@@ -2,6 +2,6 @@ var gulp = require('flarum-gulp');
 
 gulp({
   modules: {
-    'Cl1608Ho/DiscordWebhook': 'src/**/*.js'
+    'cl1608ho/DiscordWebhook': 'src/**/*.js'
   }
 });

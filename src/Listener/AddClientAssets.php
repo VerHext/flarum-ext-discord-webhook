@@ -1,6 +1,6 @@
 <?php
 
-namespace Cl1608Ho\DiscordWebhook\Listener;
+namespace cl1608ho\DiscordWebhook\Listener;
 
 use DirectoryIterator;
 use Flarum\Event\ConfigureLocales;
@@ -24,7 +24,7 @@ class AddClientAssets {
             $event->addAssets([
                 __DIR__ . '/../../js/admin/dist/extension.js'
             ]);
-            $event->addBootstrapper('Cl1608Ho/DiscordWebhook/main');
+            $event->addBootstrapper('cl1608ho/DiscordWebhook/main');
         }
     }
 

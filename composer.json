@@ -1,5 +1,5 @@
 {
-    "name": "Cl1608Ho/flarum-ext-discord-webhook",
+    "name": "cl1608ho/flarum-ext-discord-webhook",
     "description": "Sends notifications to a discord webhook when a new post is made",
     "type": "flarum-extension",
     "keywords": ["notification"],
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cl1608Ho\\DiscordWebhook\\": "src/"
+            "cl1608ho\\DiscordWebhook\\": "src/"
         }
     },
     "extra": {

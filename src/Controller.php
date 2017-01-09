@@ -1,6 +1,6 @@
 <?php
 
-namespace Cl1608Ho\DiscordWebhook;
+namespace cl1608ho\DiscordWebhook;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -28,7 +28,7 @@ class Controller {
 	$tags = $event->discussion->getAttribute("tags");
 
 	foreach($tags as $tag) {
-	    $webhook_url = $this->settings->get('Cl1608Ho-discord-webhook.webhook_urls.' . $tag->id);
+	    $webhook_url = $this->settings->get('cl1608ho-discord-webhook.webhook_urls.' . $tag->id);
 	    if($webhook_url != "") {
 		$postData = array(
 		    'embeds' => array(

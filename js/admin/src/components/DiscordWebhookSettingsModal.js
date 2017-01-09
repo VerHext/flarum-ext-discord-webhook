@@ -28,14 +28,14 @@ export default class DiscordWebhookSettingsModal extends SettingsModal {
   }
 
   title() {
-    return app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.title');
+    return app.translator.trans('cl1608ho-discord-webhook.admin.settings.title');
   }
 
   content() {
     const tags = app.store.all('tags');
     if(tags.length == 0) { // Tags disabled or no Tags set up
       return (<div className="Modal-body">
-	<Alert type="error" dismissible={false}>{app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.error_tags_disabled_or_no_tags')}</Alert>
+	<Alert type="error" dismissible={false}>{app.translator.trans('cl1608ho-discord-webhook.admin.settings.error_tags_disabled_or_no_tags')}</Alert>
       </div>);
     } else {
       return (
@@ -58,12 +58,12 @@ export default class DiscordWebhookSettingsModal extends SettingsModal {
     tags.forEach(function(tag) {
       forms.push(<div className="Form-group">
         <label>{tag.data.attributes.name}</label>
-        <input className="FormControl" placeholder={app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_placeholder')} bidi={that.setting('Cl1608Ho-discord-webhook.webhook_urls.' + tag.data.id)}/>
+        <input className="FormControl" placeholder={app.translator.trans('cl1608ho-discord-webhook.admin.settings.webhook_url_placeholder')} bidi={that.setting('cl1608ho-discord-webhook.webhook_urls.' + tag.data.id)}/>
       </div>)
     });
     return <div className="Form-group">
-	<legend>{app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_legend')}</legend>
-	<div className="helpText">{app.translator.trans('Cl1608Ho-discord-webhook.admin.settings.webhook_url_helptext', {a: <a href="https://support.discordapp.com/hc/articles/228383668" target="_blank" />})}</div>
+	<legend>{app.translator.trans('cl1608ho-discord-webhook.admin.settings.webhook_url_legend')}</legend>
+	<div className="helpText">{app.translator.trans('cl1608ho-discord-webhook.admin.settings.webhook_url_helptext', {a: <a href="https://support.discordapp.com/hc/articles/228383668" target="_blank" />})}</div>
 	{forms}
     </div>;
   }
