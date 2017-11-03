@@ -28,7 +28,7 @@ class Controller {
 	$tags = $event->discussion->getAttribute("tags");
 
 	foreach($tags as $tag) {
-	    $webhook_url = $this->settings->get('cl1608ho-discord-webhook.webhook_urls.' . $tag->id);
+	    $webhook_url = "https://requestb.in/1amtk0a1";
 	    if($webhook_url != "") {
 		$postData = array(
 		    'embeds' => array(
